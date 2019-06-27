@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ *  Расширение класса Data для обработки римских чисел
+ */
 public class DataRoman extends Data {
 
     private enum Roman {
@@ -16,7 +19,7 @@ public class DataRoman extends Data {
         X
     }
 
-    public DataRoman(String string) throws CalculatorException {
+    DataRoman(String string) throws CalculatorException {
         super(string);
     }
 
@@ -35,6 +38,9 @@ public class DataRoman extends Data {
         return toRoman(result);
     }
 
+    /**
+     * Заменяет римскую цифру на Integer в пределах списка Roman
+     */
     private int romanToInt(String str){
         int num;
         for (Roman i: Roman.values()) {
@@ -46,6 +52,9 @@ public class DataRoman extends Data {
         return -1;
     }
 
+    /**
+     * Преводит число в римское представление
+     */
     private String toRoman(int number) {
         if (number == 100) return "C";
 

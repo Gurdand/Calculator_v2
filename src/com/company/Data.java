@@ -1,12 +1,15 @@
 package com.company;
 
+/**
+ *  Класс извлекает данные из входящей строки и обрабатывает их в представлении арабских чисел
+ */
 public class Data {
 
-    protected String firstNumber;
-    protected String secondNumber;
-    protected char operator = ' ';
+    String firstNumber;
+    String secondNumber;
+    private char operator = ' ';
 
-    public Data(String inputString) throws CalculatorException{
+    Data(String inputString) throws CalculatorException{
 
         firstNumber = parseData(inputString)[0];
         secondNumber = parseData(inputString)[1];
@@ -21,23 +24,44 @@ public class Data {
         if (operator == ' ') throw new CalculatorException("Недопустимый оператор!");
     }
 
-    protected int firstNumber() {
+    /**
+     * Возвращает первое число в Integer
+     */
+    protected int firstNumber() throws CalculatorException {
+        if (checkInt(firstNumber)) {
+            throw new CalculatorException("Введены неверные данные!");
+        }
         return Integer.parseInt(firstNumber);
     }
 
-    protected int secondNumber(){
+    /**
+     * Возвращает второе число в Integer
+     */
+    protected int secondNumber() throws CalculatorException{
+        if (checkInt(secondNumber)) {
+            throw new CalculatorException("Введены неверные данные!");
+        }
         return Integer.parseInt(secondNumber);
     }
 
-    protected char operator(){
+    /**
+     * Возвращает символ оператора
+     */
+    char operator(){
         return this.operator;
     }
 
+    /**
+     * Возвращает строчное представление числа
+     */
     protected String displayData(int result) {
         return String.valueOf(result);
     }
 
-    protected String[] parseData(String string) throws CalculatorException{
+    /**
+     * Разделяет исходную строку на строки с числами
+     */
+    private String[] parseData(String string) throws CalculatorException{
         String[] str = string.split("[+-/*]");
 
         if (str.length != 2) throw new CalculatorException("Неверные данные!");
@@ -45,15 +69,17 @@ public class Data {
         return str;
     }
 
-    private boolean checkInt(String[] array){
-        for(String str: array){
-            for(char ch: str.toCharArray()){
+    /**
+     * Проверяет строку на возможность конвертации в число (для Integer.parseInt)
+     */
+    private boolean checkInt(String string){
+            for(char ch: string.toCharArray()){
                 if(Character.isLetter(ch)){
-                    return false;
+                    return true;
                 }
             }
-        }
-        return true;
+
+        return false;
     }
 
 }

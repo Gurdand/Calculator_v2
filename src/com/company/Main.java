@@ -13,10 +13,10 @@ public class Main {
         String str = in.nextLine();
 
         try{
-
             // Подготовка данных
             Calculator calculator = new Calculator(str);
 
+            //Вывод результата
             calculator.showResult();
 
         }catch (CalculatorException e){
